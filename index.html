@@ -2,170 +2,103 @@
 <html lang="mn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>L.U.N.A. AI</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L.U.N.A. — AI Assistant</title>
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;overflow:hidden;
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ background:radial-gradient(ellipse at center,#102b50 0%,#061326 48%,#01050d 100%);
+ color:#d9f5ff;font-family:Arial,sans-serif;
 }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at center, #102b55 0%, #071426 45%, #020711 100%);
-  color: #dceeff;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+h1{letter-spacing:12px;font-size:34px;margin:0 0 12px;text-shadow:0 0 22px #36baff}
+.subtitle{font-size:10px;letter-spacing:4px;color:#78b9df}
+.stage{
+ position:relative;width:min(82vw,340px);height:min(82vw,340px);
+ margin:35px 0 20px;display:grid;place-items:center;
+ perspective:800px;
 }
-
-h1 {
-  letter-spacing: 9px;
-  font-size: 32px;
-  margin-bottom: 8px;
-  text-shadow: 0 0 20px #168cff;
+.orb{
+ position:relative;width:115px;height:115px;border-radius:50%;
+ background:radial-gradient(circle at 36% 30%,#eaffff 0%,#83f4ff 7%,#159bff 25%,#07509e 55%,#02152f 78%);
+ box-shadow:0 0 22px #42cfff,0 0 65px #087bff,0 0 120px #087bff66,inset 0 0 25px #b9faff;
+ animation:core 3s ease-in-out infinite;
+ z-index:3;
 }
-
-.subtitle {
-  font-size: 10px;
-  letter-spacing: 4px;
-  color: #7da9d5;
+.orb:before{
+ content:"";position:absolute;inset:-18px;border-radius:50%;
+ border:1px solid #5ceaff88;
+ box-shadow:0 0 20px #16baff66,inset 0 0 18px #16baff44;
 }
-
-.orb-area {
-  width: 260px;
-  height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 35px 0;
+.ring{
+ position:absolute;border:1px solid #47dfff99;border-radius:50%;
+ box-shadow:0 0 12px #19bfff66;
 }
-
-.orb {
-  width: 145px;
-  height: 145px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle at 35% 30%,
-    #b5f5ff,
-    #168cff 25%,
-    #0751a5 55%,
-    #03152f 78%
-  );
-  box-shadow:
-    0 0 25px #168cff,
-    0 0 65px #087bff,
-    inset 0 0 25px #9cecff;
-  animation: pulse 3s infinite ease-in-out;
-  transition: 0.4s;
+.r1{width:190px;height:190px;animation:spin 8s linear infinite}
+.r2{width:245px;height:115px;transform:rotateX(65deg);border-color:#83efff;animation:spin2 7s linear infinite}
+.r3{width:275px;height:155px;transform:rotateY(65deg);border-color:#168cff;animation:spin 11s linear infinite reverse}
+.r4{width:300px;height:300px;border-style:dashed;opacity:.55;animation:spin 28s linear infinite}
+.ring:after{
+ content:"";position:absolute;width:7px;height:7px;border-radius:50%;
+ background:#c9fbff;box-shadow:0 0 14px 4px #24caff;
+ top:10%;left:50%;
 }
-
-.orb::before {
-  content: "";
-  position: absolute;
-  width: 210px;
-  height: 210px;
-  border: 1px solid #168cff66;
-  border-radius: 50%;
-  transform: translate(-32px, -32px);
-  animation: rotate 12s linear infinite;
+.grid{
+ position:absolute;width:155px;height:155px;border-radius:50%;
+ border:1px dashed #6bdcff77;
+ background:repeating-linear-gradient(0deg,transparent 0 13px,#51dfff22 14px),
+ repeating-linear-gradient(90deg,transparent 0 13px,#51dfff22 14px);
+ mask-image:radial-gradient(circle,black 20%,transparent 72%);
+ animation:spin 18s linear infinite;
 }
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(0.92);
-    filter: brightness(0.85);
-  }
-  50% {
-    transform: scale(1.08);
-    filter: brightness(1.35);
-  }
+.particle{
+ position:absolute;width:4px;height:4px;border-radius:50%;
+ background:#aaf8ff;box-shadow:0 0 12px 3px #18baff;
+ animation:float 4s ease-in-out infinite alternate;
 }
-
-@keyframes rotate {
-  to { transform: translate(-32px, -32px) rotate(360deg); }
+.p1{top:15%;left:24%}.p2{top:70%;left:17%;animation-delay:1s}
+.p3{top:22%;right:16%;animation-delay:2s}.p4{bottom:13%;right:25%;animation-delay:.5s}
+.status{font-size:12px;letter-spacing:5px;color:#6bdfff;text-shadow:0 0 12px #168cff;margin:8px}
+button{
+ margin-top:20px;padding:13px 30px;border-radius:30px;
+ color:#dffaff;background:#082c50;border:1px solid #39caff;
+ letter-spacing:2px;box-shadow:0 0 20px #168cff55;cursor:pointer;
 }
-
-.status {
-  color: #63caff;
-  letter-spacing: 4px;
-  font-size: 12px;
-  margin-bottom: 25px;
-}
-
-button {
-  background: #0c3766;
-  color: white;
-  border: 1px solid #249dff;
-  padding: 14px 28px;
-  border-radius: 30px;
-  font-size: 14px;
-  cursor: pointer;
-  box-shadow: 0 0 18px #087bff55;
-}
-
-button:hover {
-  background: #14528c;
-}
-
-.footer {
-  position: fixed;
-  bottom: 20px;
-  color: #54799f;
-  font-size: 10px;
-  letter-spacing: 3px;
-}
+button:hover{background:#104c79}
+.footer{position:fixed;bottom:22px;font-size:9px;letter-spacing:3px;color:#547b9d}
+@keyframes core{0%,100%{transform:scale(.94);filter:brightness(.85)}50%{transform:scale(1.08);filter:brightness(1.35)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes spin2{to{transform:rotateX(65deg) rotate(360deg)}}
+@keyframes float{to{transform:translate(12px,-18px);opacity:.35}}
 </style>
 </head>
-
 <body>
-
 <h1>L.U.N.A.</h1>
-<div class="subtitle">
-LOGICAL UNDERSTANDING NEURAL ASSISTANT
+<div class="subtitle">LOGICAL UNDERSTANDING NEURAL ASSISTANT</div>
+<div class="stage">
+ <div class="ring r4"></div>
+ <div class="ring r3"></div>
+ <div class="ring r2"></div>
+ <div class="ring r1"></div>
+ <div class="grid"></div>
+ <div class="orb"></div>
+ <div class="particle p1"></div>
+ <div class="particle p2"></div>
+ <div class="particle p3"></div>
+ <div class="particle p4"></div>
 </div>
-
-<div class="orb-area">
-  <div class="orb" id="orb"></div>
-</div>
-
-<div class="status" id="status">
-SYSTEM ONLINE
-</div>
-
-<button onclick="activateLuna()">
-ACTIVATE LUNA
-</button>
-
-<div class="footer">
-PERSONAL AI SYSTEM
-</div>
-
+<div class="status" id="status">SYSTEM ONLINE</div>
+<button onclick="activate()">ACTIVATE LUNA</button>
+<div class="footer">PERSONAL AI SYSTEM · VERSION 0.2</div>
 <script>
-let active = false;
-
-function activateLuna() {
-  const status = document.getElementById("status");
-  const orb = document.getElementById("orb");
-
-  active = !active;
-
-  if (active) {
-    status.textContent = "LUNA READY";
-    orb.style.filter = "brightness(1.5)";
-    orb.style.transform = "scale(1.12)";
-  } else {
-    status.textContent = "SYSTEM ONLINE";
-    orb.style.filter = "brightness(1)";
-    orb.style.transform = "scale(1)";
-  }
+let active=false;
+function activate(){
+ active=!active;
+ document.getElementById("status").textContent=
+ active?"LUNA READY":"SYSTEM ONLINE";
 }
 </script>
-
 </body>
 </html>
