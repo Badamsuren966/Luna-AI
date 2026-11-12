@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L.U.N.A. AI</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #102b55, #050b18 70%);
+  color: #dcecff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+h1 { letter-spacing: 8px; color: #b9dcff; }
+.subtitle { color: #719acb; letter-spacing: 3px; }
+.orb {
+  width: 190px;
+  height: 190px;
+  margin: 35px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #b9edff, #168bdb 25%, #092c70 65%, #020817);
+  box-shadow: 0 0 30px #168bdb, 0 0 80px #0753b9, inset 0 0 30px #8edfff;
+  animation: pulse 3s infinite ease-in-out;
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); box-shadow: 0 0 30px #168bdb, 0 0 70px #0753b9; }
+  50% { transform: scale(1.06); box-shadow: 0 0 45px #37baff, 0 0 100px #0753b9; }
+}
+.status { color: #71caff; margin: 15px; }
+button {
+  background: #123d70;
+  border: 1px solid #319eea;
+  color: white;
+  padding: 13px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover { background: #1762a5; }
+footer { margin-top: 55px; color: #52749e; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>L.U.N.A.</h1>
+  <div class="subtitle">LOGICAL UNDERSTANDING NEURAL ASSISTANT</div>
+  <div class="orb"></div>
+  <div class="status" id="status">SYSTEM ONLINE</div>
+  <button onclick="activateLuna()">Activate LUNA</button>
+  <footer>PERSONAL AI ASSISTANT · VERSION 0.1</footer>
+
+<script>
+function activateLuna() {
+  document.getElementById("status").textContent =
+    "HELLO. LUNA IS READY.";
+}
+</script>
+</body>
+</html>
+
