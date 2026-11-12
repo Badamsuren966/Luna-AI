@@ -74,6 +74,34 @@ button{
 button:hover{background:#104c79}
 .footer{position:fixed;bottom:22px;font-size:9px;letter-spacing:3px;color:#547b9d}
 @keyframes core{0%,100%{transform:scale(.94);filter:brightness(.85)}50%{transform:scale(1.08);filter:brightness(1.35)}}
+ /* LUNA ORB STATES */
+
+.orb.listening {
+  animation: listen 1s ease-in-out infinite;
+}
+
+.orb.thinking {
+  animation: think 2s linear infinite;
+}
+
+.orb.speaking {
+  animation: speak 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes listen {
+  0%,100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.12); filter: brightness(1.4); }
+}
+
+@keyframes think {
+  to { transform: rotate(360deg) scale(1.05); }
+}
+
+@keyframes speak {
+  from { transform: scale(0.95); }
+  to { transform: scale(1.15); }
+}
+
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes spin2{to{transform:rotateX(65deg) rotate(360deg)}}
 @keyframes float{to{transform:translate(12px,-18px);opacity:.35}}
